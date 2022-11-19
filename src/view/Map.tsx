@@ -54,7 +54,7 @@ export const Map = () => {
         <Marker position={position} icon={userPin}></Marker>
         {sensors.map((sensor) => (
           <Marker
-            position={[sensor.position.latitude, sensor.position.longitude]}
+            position={[sensor.latitude, sensor.longitude]}
             icon={sensorPin}
           >
             <Popup>
@@ -77,17 +77,37 @@ export const Map = () => {
   return <Layout>'test'</Layout>;
 };
 
-const sensors = [
+export const sensors = [
   {
     name: "Sensor 1",
-    position: {
-      latitude: 50.091795,
-      longitude: 19.988131,
-    },
+    latitude: 50.091795,
+    longitude: 19.988131,
     measuring: {
       water: 30,
       ph: 3,
       radiation: 20,
+      phosphorus: 12,
+      potassium: 8,
+      magnesium: 10,
     },
+    batteryLevel: 90,
+    status: "online",
+    serialNumber: "AB1234",
+  },
+  {
+    name: "Sensor 2",
+    latitude: 50.091795,
+    longitude: 19.988131,
+    measuring: {
+      water: 30,
+      ph: 3,
+      radiation: 20,
+      phosphorus: 12,
+      potassium: 8,
+      magnesium: 10,
+    },
+    batteryLevel: 90,
+    status: "offline",
+    serialNumber: "AB1234",
   },
 ];

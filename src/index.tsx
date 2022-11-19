@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Map } from "./view/Map";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { SensorsList } from "view/SensorsList";
 
 const theme = createTheme({
   palette: {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Map />,
+  },
+  {
+    path: "/sensors-list",
+    element: <SensorsList />,
   },
 ]);
 
