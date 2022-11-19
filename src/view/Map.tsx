@@ -4,28 +4,12 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useEffect, useMemo, useState } from "react";
 import userLocation from "../assets/img/user-location.png";
 import sensorLocation from "../assets/img/sensor-pin.png";
-import { Layout } from "components/Layout";
 
-export const Map = () => {
-  const height = 500;
-  const width = 500;
-  // const position: LatLngExpression = [50.087795, 19.988131];
-  const [map, setMap] = useState<MapLeaflet | null>(null);
-  const [selectedMeasure, setSelectedMeasure] = useState<
-    "water" | "ph" | "radiation"
-  >("water");
+interface MapProps {
+  measure: string;
+}
 
-  const [position, setPosition] = useState<LatLngExpression>([
-    50.087795, 19.988131,
-  ]);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
-  }, []);
-
+export const Map = ({ measure }: MapProps) => {
   const userPin = new L.Icon({
     iconUrl: userLocation,
     iconAnchor: [22.5, 65],
@@ -36,6 +20,21 @@ export const Map = () => {
     iconAnchor: [22.5, 65],
     iconSize: new L.Point(30, 34),
   });
+  const height = 500;
+  // const position: LatLngExpression = [50.087795, 19.988131];
+  const [map, setMap] = useState<MapLeaflet | null>(null);
+
+  const [position, setPosition] = useState<LatLngExpression>([
+    50.087795, 19.988131,
+  ]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setPosition([position.coords.latitude, position.coords.longitude]);
+    });
+  }, []);
+
+  console.log(sensors[0].measuring[measure]);
 
   const displayMap = useMemo(
     () => (
@@ -44,7 +43,7 @@ export const Map = () => {
         zoom={14}
         zoomControl={false}
         attributionControl={true}
-        style={{ height: height, width: width }}
+        style={{ height: height }}
         ref={setMap}
       >
         <TileLayer
@@ -59,11 +58,10 @@ export const Map = () => {
           >
             <Popup>
               {`Name: ${sensor.name}`} <br />
-              {selectedMeasure === "water" &&
-                `water: ${sensor.measuring.water}`}
-              {selectedMeasure === "ph" && `ph: ${sensor.measuring.ph}`}
+              {`${measure}: ${sensor.measuring[measure]}`}
+              {/* {selectedMeasure === "ph" && `ph: ${sensor.measuring.ph}`}
               {selectedMeasure === "radiation" &&
-                `radiation: ${sensor.measuring.radiation}`}
+                `radiation: ${sensor.measuring.radiation}`} */}
             </Popup>
           </Marker>
         ))}
@@ -71,10 +69,12 @@ export const Map = () => {
     ),
     [position]
   );
+
   useEffect(() => {
     map && position && map.setView(position, 14);
   }, [position]);
-  return <Layout>'test'</Layout>;
+
+  return <div>{displayMap}</div>;
 };
 
 export const sensors = [
@@ -89,8 +89,9 @@ export const sensors = [
       phosphorus: 12,
       potassium: 8,
       magnesium: 10,
+      temperature: 90,
     },
-    batteryLevel: 90,
+    batteryLevel: 9,
     status: "online",
     serialNumber: "AB1234",
   },
@@ -105,9 +106,10 @@ export const sensors = [
       phosphorus: 12,
       potassium: 8,
       magnesium: 10,
+      temperature: 90,
     },
     batteryLevel: 90,
     status: "offline",
-    serialNumber: "AB1234",
+    serialNumber: "CD5678",
   },
 ];

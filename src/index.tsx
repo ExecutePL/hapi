@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Map } from "./view/Map";
+import { SensorMap } from "./view/SensorMap";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SensorsList } from "view/SensorsList";
+import { Sensor } from "view/Sensor";
 
 const theme = createTheme({
   palette: {
@@ -21,11 +22,15 @@ const theme = createTheme({
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Map />,
+    element: <SensorMap />,
   },
   {
     path: "/sensors-list",
     element: <SensorsList />,
+  },
+  {
+    path: "/sensor/:serialNumber",
+    element: <Sensor />,
   },
 ]);
 

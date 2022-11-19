@@ -15,4 +15,5 @@ export interface Measuring {
   phosphorus: number;
   potassium: number;
   magnesium: number;
+  temperature: number;
 }

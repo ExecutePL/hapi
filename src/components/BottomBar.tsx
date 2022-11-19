@@ -1,42 +1,81 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import HomeIcon from "@mui/icons-material/Home";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import RestoreIcon from "@mui/icons-material/Restore";
+import Paper from "@mui/material/Paper";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import IsoIcon from "@mui/icons-material/Iso";
 
 export const BottomBar = () => {
+  const [value, setValue] = React.useState(0);
   return (
-    <AppBar
-      position="fixed"
-      color="primary"
+    <Paper
       sx={{
-        top: "auto",
+        position: "fixed",
         bottom: 0,
+        left: 0,
+        right: 0,
       }}
-      style={{ boxShadow: "1px 4px 15px 0px rgba(66, 68, 90, 1)" }}
+      elevation={3}
     >
-      <Toolbar
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
         }}
       >
-        <IconButton aria-label="home">
-          <HomeIcon color="secondary" />
-        </IconButton>
-        <IconButton aria-label="home">
-          <AddLocationAltIcon color="secondary" />
-        </IconButton>
-        <IconButton aria-label="home">
-          <IsoIcon color="secondary" />
-        </IconButton>
-        <IconButton aria-label="home">
-          <AccountCircleIcon color="secondary" />
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+        <BottomNavigationAction
+          icon={<RestoreIcon />}
+          sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
+          value="home"
+        />
+        <BottomNavigationAction
+          icon={<AddLocationAltIcon />}
+          sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
+          value="addLocationAlt"
+        />
+        <BottomNavigationAction
+          icon={<IsoIcon />}
+          sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
+          value="Iso"
+        />
+        <BottomNavigationAction
+          icon={<AccountCircleIcon />}
+          sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
+          value="account"
+        />
+      </BottomNavigation>
+    </Paper>
+    // <AppBar
+    //   position="fixed"
+    //   color="primary"
+    //   sx={{
+    //     top: "auto",
+    //     bottom: 0,
+    //   }}
+    //   style={{ boxShadow: "1px 4px 15px 0px rgba(66, 68, 90, 1)" }}
+    // >
+    //   <Toolbar
+    //     sx={{
+    //       display: "flex",
+    //       justifyContent: "space-around",
+    //     }}
+    //   >
+    //     <IconButton aria-label="home">
+    //       <HomeIcon color="secondary" />
+    //     </IconButton>
+    //     <IconButton aria-label="home">
+    //       <AddLocationAltIcon color="secondary" />
+    //     </IconButton>
+    //     <IconButton aria-label="home">
+    //       <IsoIcon color="secondary" />
+    //     </IconButton>
+    //     <IconButton aria-label="home">
+    //       <AccountCircleIcon color="secondary" />
+    //     </IconButton>
+    //   </Toolbar>
+    // </AppBar>
   );
 };
