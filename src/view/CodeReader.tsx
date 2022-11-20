@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-// import { QrReader } from "react-qr-reader";
+import { QrReader } from "react-qr-reader";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "components/Layout";
@@ -22,7 +22,7 @@ export const CodeReader = () => {
         Please, scan qr code
       </Typography>
       <Box sx={{ width: "100%", height: "100%" }}>
-        {/* <QrReader
+        <QrReader
           onResult={(result, error) => {
             if (!!result) {
               setData((result as any)?.text);
@@ -31,7 +31,7 @@ export const CodeReader = () => {
           constraints={{
             facingMode: "environment",
           }}
-        /> */}
+        />
       </Box>
     </Layout>
   );
