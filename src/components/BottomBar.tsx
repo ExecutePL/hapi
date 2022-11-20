@@ -1,11 +1,13 @@
 import * as React from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
+import HomeIcon from "@mui/icons-material/Home";
 import Paper from "@mui/material/Paper";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import IsoIcon from "@mui/icons-material/Iso";
+import SensorsIcon from "@mui/icons-material/Sensors";
+import MapIcon from "@mui/icons-material/Map";
 
 export const BottomBar = () => {
   const [value, setValue] = React.useState(0);
@@ -27,7 +29,7 @@ export const BottomBar = () => {
         }}
       >
         <BottomNavigationAction
-          icon={<RestoreIcon />}
+          icon={<HomeIcon />}
           sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
           value="home"
         />
@@ -37,7 +39,7 @@ export const BottomBar = () => {
           value="addLocationAlt"
         />
         <BottomNavigationAction
-          icon={<IsoIcon />}
+          icon={<SensorsIcon />}
           sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
           value="Iso"
         />
@@ -48,34 +50,5 @@ export const BottomBar = () => {
         />
       </BottomNavigation>
     </Paper>
-    // <AppBar
-    //   position="fixed"
-    //   color="primary"
-    //   sx={{
-    //     top: "auto",
-    //     bottom: 0,
-    //   }}
-    //   style={{ boxShadow: "1px 4px 15px 0px rgba(66, 68, 90, 1)" }}
-    // >
-    //   <Toolbar
-    //     sx={{
-    //       display: "flex",
-    //       justifyContent: "space-around",
-    //     }}
-    //   >
-    //     <IconButton aria-label="home">
-    //       <HomeIcon color="secondary" />
-    //     </IconButton>
-    //     <IconButton aria-label="home">
-    //       <AddLocationAltIcon color="secondary" />
-    //     </IconButton>
-    //     <IconButton aria-label="home">
-    //       <IsoIcon color="secondary" />
-    //     </IconButton>
-    //     <IconButton aria-label="home">
-    //       <AccountCircleIcon color="secondary" />
-    //     </IconButton>
-    //   </Toolbar>
-    // </AppBar>
   );
 };
