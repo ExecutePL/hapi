@@ -1,9 +1,9 @@
 export const MEASURING = [
-  "water",
-  "ph",
-  "radiation",
+  "acidity",
+  "irradiation",
+  "irrigation",
+  "magnesium",
   "phosphorus",
   "potassium",
-  "magnesium",
   "temperature",
 ];

@@ -127,31 +127,79 @@ export const Sensor = () => {
                 <List sx={{ width: "100%" }}>
                   <ListItem sx={{ justifyContent: "space-between" }}>
                     <Typography>{"Acidity: "}</Typography>
-                    {/* <Typography>{sensor.measures.acidity}%</Typography> */}
+                    <Typography>
+                      {sensor.measures[sensor.measures.length - 1].acidity
+                        ? `${
+                            sensor.measures[sensor.measures.length - 1].acidity
+                          } %`
+                        : "-"}
+                    </Typography>
                   </ListItem>
                   <ListItem sx={{ justifyContent: "space-between" }}>
                     <Typography>{"Irradiation: "}</Typography>
-                    {/* <Typography>{sensor.measures.irradiation}</Typography> */}
+                    <Typography>
+                      {sensor.measures[sensor.measures.length - 1].irradiation
+                        ? `${
+                            sensor.measures[sensor.measures.length - 1]
+                              .irradiation
+                          } Sv`
+                        : "-"}
+                    </Typography>
                   </ListItem>
                   <ListItem sx={{ justifyContent: "space-between" }}>
                     <Typography>{"Irrigation: "}</Typography>
-                    {/* <Typography>{sensor.measures.irrigation} Sv</Typography> */}
+                    <Typography>
+                      {sensor.measures[sensor.measures.length - 1].irrigation
+                        ? `${
+                            sensor.measures[sensor.measures.length - 1]
+                              .irrigation
+                          } %`
+                        : "-"}
+                    </Typography>
                   </ListItem>
                   <ListItem sx={{ justifyContent: "space-between" }}>
                     <Typography>{"Magnesium: "}</Typography>
-                    {/* <Typography>{sensor.measures.magnesium} %</Typography> */}
+                    <Typography>
+                      {sensor.measures[sensor.measures.length - 1].magnesium
+                        ? `${
+                            sensor.measures[sensor.measures.length - 1]
+                              .magnesium
+                          } %`
+                        : "-"}
+                    </Typography>
                   </ListItem>
                   <ListItem sx={{ justifyContent: "space-between" }}>
                     <Typography>{"Phosphorus: "}</Typography>
-                    {/* <Typography>{sensor.measures.phosphorus} %</Typography> */}
+                    <Typography>
+                      {sensor.measures[sensor.measures.length - 1].phosphorus
+                        ? `${
+                            sensor.measures[sensor.measures.length - 1]
+                              .phosphorus
+                          } %`
+                        : "-"}
+                    </Typography>
                   </ListItem>
                   <ListItem sx={{ justifyContent: "space-between" }}>
                     <Typography>{"Potassium: "}</Typography>
-                    {/* <Typography>{sensor.measures.potassium} %</Typography> */}
+                    <Typography>
+                      {sensor.measures[sensor.measures.length - 1].potassium
+                        ? `${
+                            sensor.measures[sensor.measures.length - 1]
+                              .potassium
+                          } %`
+                        : "-"}
+                    </Typography>
                   </ListItem>
                   <ListItem sx={{ justifyContent: "space-between" }}>
                     <Typography>{"Temperature: "}</Typography>
-                    {/* <Typography>{sensor.measures.temperature} C</Typography> */}
+                    <Typography>
+                      {sensor.measures[sensor.measures.length - 1].temperature
+                        ? `${
+                            sensor.measures[sensor.measures.length - 1]
+                              .temperature
+                          } C`
+                        : "-"}
+                    </Typography>
                   </ListItem>
                 </List>
               </Box>
