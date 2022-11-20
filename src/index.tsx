@@ -7,6 +7,7 @@ import { SensorMap } from "./view/SensorMap";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SensorsList } from "view/SensorsList";
 import { Sensor } from "view/Sensor";
+import { AddSensor } from "view/AddSensor";
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/sensor/:serialNumber",
     element: <Sensor />,
+  },
+  {
+    path: "/add-sensor",
+    element: <AddSensor />,
   },
 ]);
 
