@@ -87,6 +87,7 @@ export const Map = ({ measure }: MapProps) => {
         ></Marker>
         {sensorsData.length &&
           sensorsData.map((sensor) => {
+            if (!sensor.measures?.length) return;
             return (
               <React.Fragment key={sensor.serialNumber}>
                 <Circle
