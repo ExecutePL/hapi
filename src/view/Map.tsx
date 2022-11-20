@@ -1,9 +1,9 @@
 import L, { LatLngExpression, Map as MapLeaflet } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { Circle, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useEffect, useMemo, useState } from "react";
 import userLocation from "../assets/img/user-location.png";
-import sensorLocation from "../assets/img/sensor-pin.png";
+import sensorLocation from "../assets/img/pin.png";
 
 interface MapProps {
   measure: string;
@@ -12,18 +12,16 @@ interface MapProps {
 export const Map = ({ measure }: MapProps) => {
   const userPin = new L.Icon({
     iconUrl: userLocation,
-    iconAnchor: [22.5, 65],
+    iconAnchor: [18, 32],
     iconSize: new L.Point(32, 34),
   });
   const sensorPin = new L.Icon({
     iconUrl: sensorLocation,
-    iconAnchor: [22.5, 65],
-    iconSize: new L.Point(30, 34),
+    iconAnchor: [16, 30],
+    iconSize: new L.Point(28, 29),
   });
   const height = 500;
-  // const position: LatLngExpression = [50.087795, 19.988131];
   const [map, setMap] = useState<MapLeaflet | null>(null);
-
   const [position, setPosition] = useState<LatLngExpression>([
     50.087795, 19.988131,
   ]);
@@ -34,7 +32,16 @@ export const Map = ({ measure }: MapProps) => {
     });
   }, []);
 
-  console.log(sensors[0].measuring[measure]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setPosition([position.coords.latitude, position.coords.longitude]);
+      });
+    }, 10000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   const displayMap = useMemo(
     () => (
@@ -43,7 +50,7 @@ export const Map = ({ measure }: MapProps) => {
         zoom={14}
         zoomControl={false}
         attributionControl={true}
-        style={{ height: height }}
+        style={{ height: height, width: "85%" }}
         ref={setMap}
       >
         <TileLayer
@@ -51,27 +58,42 @@ export const Map = ({ measure }: MapProps) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={position} icon={userPin}></Marker>
-        {sensors.map((sensor) => (
-          <Marker
-            position={[sensor.latitude, sensor.longitude]}
-            icon={sensorPin}
-          >
-            <Popup>
-              {`Name: ${sensor.name}`} <br />
-              {`${measure}: ${sensor.measuring[measure]}`}
-              {/* {selectedMeasure === "ph" && `ph: ${sensor.measuring.ph}`}
+
+        <Circle
+          center={[position[0] + 0.0002, position[1]]}
+          radius={10}
+          pathOptions={{ color: "blue" }}
+        />
+        <Marker position={[position[0] + 0.0002, position[1]]} icon={sensorPin}>
+          <Popup>
+            {`Name: ${sensors[0].name}`} <br />
+            {`${measure}: ${sensors[0].measuring[measure]}`}
+            {/* {selectedMeasure === "ph" && `ph: ${sensor.measuring.ph}`}
               {selectedMeasure === "radiation" &&
                 `radiation: ${sensor.measuring.radiation}`} */}
-            </Popup>
-          </Marker>
-        ))}
+          </Popup>
+        </Marker>
+        <Circle
+          center={[position[0] - 0.0003, position[1]]}
+          radius={10}
+          pathOptions={{ color: "red" }}
+        />
+        <Marker position={[position[0] - 0.0003, position[1]]} icon={sensorPin}>
+          <Popup>
+            {`Name: ${sensors[0].name}`} <br />
+            {`${measure}: ${sensors[0].measuring[measure]}`}
+            {/* {selectedMeasure === "ph" && `ph: ${sensor.measuring.ph}`}
+              {selectedMeasure === "radiation" &&
+                `radiation: ${sensor.measuring.radiation}`} */}
+          </Popup>
+        </Marker>
       </MapContainer>
     ),
-    [position]
+    [position, measure]
   );
 
   useEffect(() => {
-    map && position && map.setView(position, 14);
+    map && position && map.setView(position, 33);
   }, [position]);
 
   return <div>{displayMap}</div>;

@@ -1,19 +1,20 @@
 export interface Sensor {
+  id: number;
   name: string;
   latitude: number;
   longitude: number;
-  measuring: Measuring;
+  measures: Measures[];
   batteryLevel: number;
   status: string;
   serialNumber: string;
 }
 
-export interface Measuring {
-  water: number;
-  ph: number;
-  radiation: number;
+export interface Measures {
+  acidity: number;
+  irradiation: number;
+  irrigation: number;
+  magnesium: number;
   phosphorus: number;
   potassium: number;
-  magnesium: number;
-  temperature: number;
+  temperature?: number;
 }

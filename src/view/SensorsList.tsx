@@ -1,5 +1,4 @@
 import { Layout } from "components/Layout";
-import { sensors } from "view/Map";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -11,10 +10,26 @@ import SensorsOffIcon from "@mui/icons-material/SensorsOff";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { SENSORS } from "graphql/queries/sensors";
+import { Sensor } from "types/general";
 
 export const SensorsList = () => {
   const navigate = useNavigate();
+  const [sensorsData, setSensorsData] = useState<Sensor[] | []>([]);
+  const [sensors, { data }] = useLazyQuery(SENSORS, {
+    fetchPolicy: "network-only",
+  });
+
+  useEffect(() => {
+    sensors({ variables: { first: 10, page: 1 } });
+  }, []);
+
+  useEffect(() => {
+    if (!data) return;
+    setSensorsData(data.sensors.data);
+  }, [data]);
   return (
     <Layout>
       <Typography
@@ -26,7 +41,7 @@ export const SensorsList = () => {
       </Typography>
 
       <List sx={{ width: "100%", maxWidth: 360 }}>
-        {sensors.map((sensor) => (
+        {sensorsData.map((sensor) => (
           <React.Fragment>
             <ListItem
               key={sensor.serialNumber}

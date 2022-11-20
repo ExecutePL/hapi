@@ -5,12 +5,13 @@ import HomeIcon from "@mui/icons-material/Home";
 import Paper from "@mui/material/Paper";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-import IsoIcon from "@mui/icons-material/Iso";
 import SensorsIcon from "@mui/icons-material/Sensors";
-import MapIcon from "@mui/icons-material/Map";
+import { useNavigate } from "react-router-dom";
 
 export const BottomBar = () => {
+  const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
+
   return (
     <Paper
       sx={{
@@ -32,6 +33,7 @@ export const BottomBar = () => {
           icon={<HomeIcon />}
           sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
           value="home"
+          onClick={() => navigate("/")}
         />
         <BottomNavigationAction
           icon={<AddLocationAltIcon />}
@@ -42,11 +44,13 @@ export const BottomBar = () => {
           icon={<SensorsIcon />}
           sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
           value="Iso"
+          onClick={() => navigate("/sensors-list")}
         />
         <BottomNavigationAction
           icon={<AccountCircleIcon />}
           sx={{ backgroundColor: "primary.main", color: "secondary.main" }}
           value="account"
+          disabled
         />
       </BottomNavigation>
     </Paper>

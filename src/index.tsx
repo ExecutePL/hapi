@@ -8,6 +8,17 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SensorsList } from "view/SensorsList";
 import { Sensor } from "view/Sensor";
 import { AddSensor } from "view/AddSensor";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://hapibe.herokuapp.com/graphql",
+  cache: new InMemoryCache(),
+});
 
 const theme = createTheme({
   palette: {
@@ -44,9 +55,11 @@ if (!rootElement) throw new Error("Failed to find the root element");
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </ApolloProvider>
   </React.StrictMode>
 );
 
