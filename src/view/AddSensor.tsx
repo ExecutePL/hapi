@@ -34,9 +34,13 @@ export const AddSensor = () => {
   const [address, setAddress] = React.useState<string>("");
   const [newSensor, setNewSensor] = React.useState<NewSensor | null>(null);
   const [isPopupOpened, setIsPopupOpened] = React.useState(false);
+  const [isErrorPopupOpened, setIsErrorPopupOpened] = React.useState(false);
   const [createSensor] = useMutation(CREATE_SENSOR, {
-    onCompleted: () => {
+    onCompleted: (data) => {
       setIsPopupOpened(true);
+    },
+    onError: () => {
+      setIsErrorPopupOpened(true);
     },
   });
   const handleGetLocation = () => {
@@ -157,6 +161,25 @@ export const AddSensor = () => {
         <DialogActions>
           <Button onClick={handleClose} autoFocus color="secondary">
             Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        fullScreen={false}
+        open={isErrorPopupOpened}
+        onClose={() => setIsErrorPopupOpened(false)}
+        aria-labelledby="sensor-added"
+      >
+        <DialogTitle id="sensor-added" textAlign={"center"}>
+          {"New sensor is too close to other sensor"}
+        </DialogTitle>
+        <DialogActions>
+          <Button
+            onClick={() => setIsErrorPopupOpened(false)}
+            autoFocus
+            color="secondary"
+          >
+            Close
           </Button>
         </DialogActions>
       </Dialog>
