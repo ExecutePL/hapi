@@ -117,34 +117,6 @@ export const Map = ({ measure }: MapProps) => {
               </React.Fragment>
             );
           })}
-        {/* <Circle
-          center={[position[0] + 0.0002, position[1]]}
-          radius={10}
-          pathOptions={{ color: "blue" }}
-        /> */}
-        {/* <Marker position={[position[0] + 0.0002, position[1]]} icon={sensorPin}>
-          <Popup>
-            {`Name: ${sensors[0].name}`} <br />
-            {`${measure}: ${sensors[0].measuring[measure]}`} */}
-        {/* {selectedMeasure === "ph" && `ph: ${sensor.measuring.ph}`}
-              {selectedMeasure === "radiation" &&
-                `radiation: ${sensor.measuring.radiation}`} */}
-        {/* </Popup>
-        </Marker> */}
-        {/* <Circle
-          center={[position[0] - 0.0003, position[1]]}
-          radius={10}
-          pathOptions={{ color: "red" }}
-        /> */}
-        {/* <Marker position={[position[0] - 0.0003, position[1]]} icon={sensorPin}>
-          <Popup>
-            {`Name: ${sensors[0].name}`} <br />
-            {`${measure}: ${sensors[0].measuring[measure]}`} */}
-        {/* {selectedMeasure === "ph" && `ph: ${sensor.measuring.ph}`}
-              {selectedMeasure === "radiation" &&
-                `radiation: ${sensor.measuring.radiation}`} */}
-        {/* </Popup>
-        </Marker>*/}
       </MapContainer>
     ),
     [position, measure, sensorsData, userPosition]
