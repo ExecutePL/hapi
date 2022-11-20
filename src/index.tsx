@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     element: <Sensor />,
   },
   {
-    path: "/add-sensor",
+    path: "/add-sensor/:serialNumber",
     element: <AddSensor />,
   },
 ]);

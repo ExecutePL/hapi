@@ -13,8 +13,10 @@ import {
 import { Layout } from "components/Layout";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import { getAddress } from "utils/getAddress";
+import { useParams } from "react-router-dom";
 
 export const AddSensor = () => {
+  const { serialNumber } = useParams();
   const [address, setAddress] = React.useState<string>("");
   const handleGetLocation = () => {
     console.log("get");
@@ -59,6 +61,8 @@ export const AddSensor = () => {
           label="Serial Number"
           placeholder="Enter Serial Number"
           color="secondary"
+          disabled
+          defaultValue={serialNumber}
         />
         <FormControl variant="outlined" color="secondary">
           <InputLabel htmlFor="sensor-location" required>
