@@ -14,6 +14,7 @@ import {
   ApolloProvider,
   gql,
 } from "@apollo/client";
+import { CodeReader } from "view/CodeReader";
 
 const client = new ApolloClient({
   uri: "https://hapibe.herokuapp.com/graphql",
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "/add-sensor/:serialNumber",
     element: <AddSensor />,
+  },
+  {
+    path: "/scan",
+    element: <CodeReader />,
   },
 ]);
 
