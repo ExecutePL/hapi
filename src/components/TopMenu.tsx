@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import logo from "../assets/img/fullLogo.png";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { Link } from "@mui/material";
 
 export const TopMenu = () => {
   return (
@@ -24,7 +25,9 @@ export const TopMenu = () => {
             aria-label="logo"
             sx={{ mr: 2 }}
           >
-            <img src={logo} width={100} alt="Hapi Logo" />
+            <Link href="/">
+              <img src={logo} width={100} alt="Hapi Logo" />
+            </Link>
           </IconButton>
           <Box
             sx={{
